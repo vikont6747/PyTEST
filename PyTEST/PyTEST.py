@@ -149,12 +149,28 @@ class TestOnSurus_Sport(unittest.TestCase):
         time.sleep(4)
 
         element = self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_favorite_count"]/a/span')))
-        tovarvs = element.text
-        if tovarvs == "(1)":
+        tovarlike = element.text
+        if tovarlike == "(1)":
             self.to_file("Test_6_passed")
         else:
             self.to_file("Test_6_failed")
             
+#тест7 фильтрация списка товаров
+    def test7(self):
+        self.to_file("Test_7_start")
+        self.driver.get(self.sitetest)
+        
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="page"]/header/nav/div/div/ul/li[2]'))).click()
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="catalog-filter"]/div[1]/form[1]/div[3]/div[2]/div[1]/label[11]'))).click()
+
+        time.sleep(2)
+
+        element = self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="modef"]/span')))
+        tovarf = element.text
+        if tovarf == "6":
+            self.to_file("Test_7_passed")
+        else:
+            self.to_file("Test_7_failed")
 
 
 
@@ -166,8 +182,8 @@ if __name__ == "__main__":
     #suite.addTest(TestOnSurus_Sport('test3'))
     #suite.addTest(TestOnSurus_Sport('test4'))
     #suite.addTest(TestOnSurus_Sport('test5'))
-    suite.addTest(TestOnSurus_Sport('test6'))
-    #suite.addTest(TestOnSurus_Sport('test7'))
+    #suite.addTest(TestOnSurus_Sport('test6'))
+    suite.addTest(TestOnSurus_Sport('test7'))
     #suite.addTest(TestOnSurus_Sport('test8'))
     #suite.addTest(TestOnSurus_Sport('test9'))
     #suite.addTest(TestOnSurus_Sport('test10'))
