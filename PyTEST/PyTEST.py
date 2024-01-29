@@ -210,23 +210,33 @@ class TestOnSurus_Sport(unittest.TestCase):
         else:
             self.to_file("Test_9_failed")
 
+#тест10 переключение карусели баннеров
+    def test10(self):
+        self.to_file("Test_10_start")
+        self.driver.get(self.sitetest)
 
-
-
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="page"]/section[1]/div[1]/div[1]/div[3]/div[3]'))).click()
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="page"]/section[1]/div[1]/div[1]/div[3]/div[1]'))).click()
+        
+        element = self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="page"]/section[1]/div[1]/div[1]/div[3]/div[1]'))).get_attribute("class")
+        if element == "owl-dot active":
+            self.to_file("Test_10_passed")
+        else:
+            self.to_file("Test_10_failed")
 
 
 if __name__ == "__main__":
     suite = unittest.TestSuite()
 
-    #suite.addTest(TestOnSurus_Sport('test1'))
-    #suite.addTest(TestOnSurus_Sport('test2'))
-    #suite.addTest(TestOnSurus_Sport('test3'))
-    #suite.addTest(TestOnSurus_Sport('test4'))
-    #suite.addTest(TestOnSurus_Sport('test5'))
-    #suite.addTest(TestOnSurus_Sport('test6'))
-    #suite.addTest(TestOnSurus_Sport('test7'))
-    #suite.addTest(TestOnSurus_Sport('test8'))
+    suite.addTest(TestOnSurus_Sport('test1'))
+    suite.addTest(TestOnSurus_Sport('test2'))
+    suite.addTest(TestOnSurus_Sport('test3'))
+    suite.addTest(TestOnSurus_Sport('test4'))
+    suite.addTest(TestOnSurus_Sport('test5'))
+    suite.addTest(TestOnSurus_Sport('test6'))
+    suite.addTest(TestOnSurus_Sport('test7'))
+    suite.addTest(TestOnSurus_Sport('test8'))
     suite.addTest(TestOnSurus_Sport('test9'))
-    #suite.addTest(TestOnSurus_Sport('test10'))
+    suite.addTest(TestOnSurus_Sport('test10'))
 
     unittest.TextTestRunner().run(suite)
