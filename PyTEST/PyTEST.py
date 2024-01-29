@@ -83,8 +83,8 @@ class TestOnSurus_Sport(unittest.TestCase):
         time.sleep(2)
 
         element = self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_cart_block"]/span/span[2]')))
-        poisk = element.text
-        if poisk == "1 позиция на 330 руб.":
+        tovar = element.text
+        if tovar == "1 позиция на 330 руб.":
             self.to_file("Test_3_passed")
         else:
             self.to_file("Test_3_failed")
@@ -105,11 +105,35 @@ class TestOnSurus_Sport(unittest.TestCase):
         time.sleep(2)
 
         element = self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="empty_basket"]/div[2]/div[2]')))
-        poisk = element.text
-        if poisk == "Ваша корзина пуста":
+        tovardel = element.text
+        if tovardel == "Ваша корзина пуста":
             self.to_file("Test_4_passed")
         else:
             self.to_file("Test_4_failed")
+
+#тест5 сравнить товары
+    def test5(self):
+        self.to_file("Test_5_start")
+        self.driver.get(self.sitetest)  
+        
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="page"]/header/nav/div/div/ul/li[1]'))).click()  
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_3966226736_74451"]/div/div[2]/a'))).click() 
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_117848907_74451_compare_link74730"]'))).click()
+        
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="page"]/header/nav/div/div/ul/li[1]'))).click()  
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_3966226736_74452"]/div/div[2]/a'))).click() 
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_117848907_74452_compare_link74735"]'))).click()
+        
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_compare_count"]'))).click()
+
+        time.sleep(2)
+
+        element = self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_compare_count"]/span')))
+        tovarvs = element.text
+        if tovarvs == "(2)":
+            self.to_file("Test_5_passed")
+        else:
+            self.to_file("Test_5_failed")
 
 
 
@@ -120,8 +144,8 @@ if __name__ == "__main__":
     #suite.addTest(TestOnSurus_Sport('test1'))
     #suite.addTest(TestOnSurus_Sport('test2'))
     #suite.addTest(TestOnSurus_Sport('test3'))
-    suite.addTest(TestOnSurus_Sport('test4'))
-    #suite.addTest(TestOnSurus_Sport('test5'))
+    #suite.addTest(TestOnSurus_Sport('test4'))
+    suite.addTest(TestOnSurus_Sport('test5'))
     #suite.addTest(TestOnSurus_Sport('test6'))
     #suite.addTest(TestOnSurus_Sport('test7'))
     #suite.addTest(TestOnSurus_Sport('test8'))
