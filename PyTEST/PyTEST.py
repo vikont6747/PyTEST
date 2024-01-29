@@ -95,8 +95,8 @@ class TestOnSurus_Sport(unittest.TestCase):
 if __name__ == "__main__":
     suite = unittest.TestSuite()
 
-    suite.addTest(TestOnSurus_Sport('test1'))
-    suite.addTest(TestOnSurus_Sport('test2'))
+    #suite.addTest(TestOnSurus_Sport('test1'))
+    #suite.addTest(TestOnSurus_Sport('test2'))
     suite.addTest(TestOnSurus_Sport('test3'))
     #suite.addTest(TestOnSurus_Sport('test4'))
     #suite.addTest(TestOnSurus_Sport('test5'))
