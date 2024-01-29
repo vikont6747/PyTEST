@@ -9,7 +9,6 @@ from selenium.webdriver.support import expected_conditions as EC
 class TestOnSurus_Sport(unittest.TestCase):
     def setUp(self):
         self.sitetest = "https://surus-shop.ru/"
-        #self.sitetest2 = ""
         self.file_path = r"C:\Users\Kazimir\Documents\testlog\test.log"
         self.driver = webdriver.Firefox()
         self.wait = WebDriverWait(self.driver, 15)
@@ -27,7 +26,10 @@ class TestOnSurus_Sport(unittest.TestCase):
                 file.write(text + '\n')
             print(f"File {self.file_path} created, and text appended")
 
-#тест1 вход по логину и паролю
+    def initialize():
+        return TestOnSurus_Sport
+    
+#тест1 вход по логину и паролю 
     def test1(self):
         self.to_file("Test_1_start")
         self.driver.get(self.sitetest)
@@ -43,15 +45,30 @@ class TestOnSurus_Sport(unittest.TestCase):
         self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="login"]/div[2]/form/button'))).click()    #нажать кнопку   
 
         element = self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_personal_menu"]/a')))
-        login=element.text
+        login = element.text
         if login == "Личный кабинет":
             self.to_file("Test_1_passed")
         else:
             self.to_file("Test_1_failed")
 
-#тест1 вход по логину и паролю
+#тест2 поиск по каталогу
+    def test2(self):
+        self.to_file("Test_2_start")
+        self.driver.get(self.sitetest)  
+        
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="title-search"]/form/input'))).clear()    #очистка поля
+        
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="title-search"]/form/input'))).send_keys("Шорты")    #заполнение поля
 
+        element = self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="search-dropdown"]/ul/li/ul/li[2]/a/span[2]/span[1]/b')))
+        
+        time.sleep(2)        
 
+        poisk = element.text
+        if poisk == "Шорты":
+            self.to_file("Test_2_passed")
+        else:
+            self.to_file("Test_2_failed")
 
 
 
@@ -61,9 +78,8 @@ class TestOnSurus_Sport(unittest.TestCase):
 if __name__ == "__main__":
     suite = unittest.TestSuite()
 
-   
     suite.addTest(TestOnSurus_Sport('test1'))
-    #suite.addTest(TestOnSurus_Sport('test2'))
+    suite.addTest(TestOnSurus_Sport('test2'))
     #suite.addTest(TestOnSurus_Sport('test3'))
     #suite.addTest(TestOnSurus_Sport('test4'))
     #suite.addTest(TestOnSurus_Sport('test5'))
