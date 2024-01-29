@@ -60,10 +60,10 @@ class TestOnSurus_Sport(unittest.TestCase):
         
         self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="title-search"]/form/input'))).send_keys("Шорты")    #заполнение поля
 
+        time.sleep(2)
+
         element = self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="search-dropdown"]/ul/li/ul/li[2]/a/span[2]/span[1]/b')))
         
-        time.sleep(2)        
-
         poisk = element.text
         if poisk == "Шорты":
             self.to_file("Test_2_passed")
@@ -71,7 +71,24 @@ class TestOnSurus_Sport(unittest.TestCase):
             self.to_file("Test_2_failed")
 
 
+#тест3 добавление товара в корзину
+    def test3(self):
+        self.to_file("Test_2_start")
+        self.driver.get(self.sitetest)  
+        
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="page"]/header/nav/div/div/ul/li[1]'))).click()  
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_3966226736_74451"]/div/div[2]/a'))).click() 
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_117848907_74451_buy_link74730"]'))).click()
 
+        time.sleep(2)
+
+        element = self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_cart_block"]/span/span[2]')))
+        
+        poisk = element.text
+        if poisk == "1 позиция на 330 руб.":
+            self.to_file("Test_3_passed")
+        else:
+            self.to_file("Test_3_failed")
 
 
 
@@ -80,7 +97,7 @@ if __name__ == "__main__":
 
     suite.addTest(TestOnSurus_Sport('test1'))
     suite.addTest(TestOnSurus_Sport('test2'))
-    #suite.addTest(TestOnSurus_Sport('test3'))
+    suite.addTest(TestOnSurus_Sport('test3'))
     #suite.addTest(TestOnSurus_Sport('test4'))
     #suite.addTest(TestOnSurus_Sport('test5'))
     #suite.addTest(TestOnSurus_Sport('test6'))
