@@ -172,6 +172,28 @@ class TestOnSurus_Sport(unittest.TestCase):
         else:
             self.to_file("Test_7_failed")
 
+#тест8 сортировка списка товаров
+    def test8(self):
+        self.to_file("Test_8_start")
+        self.driver.get(self.sitetest)
+
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="page"]/header/nav/div/div/ul/li[2]'))).click()
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="page"]/section[1]/div[2]/article[1]/div[1]/div[1]/div[2]/div[1]/label[1]/div[1]'))).click()
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="page"]/section[1]/div[2]/article[1]/div[1]/div[1]/div[2]/div[1]/label[1]/div[1]/div[2]/ul/li[2]'))).click()
+
+        time.sleep(2)
+
+        element = self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="page"]/section[1]/div[2]/article[1]/div[1]/div[1]/div[2]/div[1]/label[1]/div[1]/div[1]/div[1]')))
+        tovarsort = element.text
+        if tovarsort == "Цене, сначала дорогие":
+            self.to_file("Test_8_passed")
+        else:
+            self.to_file("Test_8_failed")
+
+
+
+
+
 
 
 if __name__ == "__main__":
@@ -183,8 +205,8 @@ if __name__ == "__main__":
     #suite.addTest(TestOnSurus_Sport('test4'))
     #suite.addTest(TestOnSurus_Sport('test5'))
     #suite.addTest(TestOnSurus_Sport('test6'))
-    suite.addTest(TestOnSurus_Sport('test7'))
-    #suite.addTest(TestOnSurus_Sport('test8'))
+    #suite.addTest(TestOnSurus_Sport('test7'))
+    suite.addTest(TestOnSurus_Sport('test8'))
     #suite.addTest(TestOnSurus_Sport('test9'))
     #suite.addTest(TestOnSurus_Sport('test10'))
 
