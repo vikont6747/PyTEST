@@ -190,6 +190,25 @@ class TestOnSurus_Sport(unittest.TestCase):
         else:
             self.to_file("Test_8_failed")
 
+#тест9 расчет стоимости по количеству товара
+    def test9(self):
+        self.to_file("Test_9_start")
+        self.driver.get(self.sitetest) 
+        
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="page"]/header/nav/div/div/ul/li[1]'))).click()  
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_3966226736_74451"]/div/div[2]/a'))).click() 
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_117848907_74451_buy_link74730"]'))).click()
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="page"]/header/div[2]/div/div[3]'))).click()
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="basket_items"]/div[2]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[2]/button'))).click()
+
+        time.sleep(5)
+
+        element = self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="basket_items"]/div[2]/div[2]/div[1]/div[2]/div[2]/div[1]/div[2]')))
+        tovar = element.text
+        if tovar == "660 руб.":
+            self.to_file("Test_9_passed")
+        else:
+            self.to_file("Test_9_failed")
 
 
 
@@ -206,8 +225,8 @@ if __name__ == "__main__":
     #suite.addTest(TestOnSurus_Sport('test5'))
     #suite.addTest(TestOnSurus_Sport('test6'))
     #suite.addTest(TestOnSurus_Sport('test7'))
-    suite.addTest(TestOnSurus_Sport('test8'))
-    #suite.addTest(TestOnSurus_Sport('test9'))
+    #suite.addTest(TestOnSurus_Sport('test8'))
+    suite.addTest(TestOnSurus_Sport('test9'))
     #suite.addTest(TestOnSurus_Sport('test10'))
 
     unittest.TextTestRunner().run(suite)
