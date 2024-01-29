@@ -135,6 +135,26 @@ class TestOnSurus_Sport(unittest.TestCase):
         else:
             self.to_file("Test_5_failed")
 
+#тест6 добавление товара в избранное
+    def test6(self):
+        self.to_file("Test_6_start")
+        self.driver.get(self.sitetest) 
+
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="page"]/header/nav/div/div/ul/li[1]'))).click()  
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_3966226736_74451"]/div/div[2]/a'))).click() 
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_117848907_74451_add_liked_compare_74730"]/div[1]/a'))).click()
+
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_favorite_count"]/a'))).click()
+
+        time.sleep(4)
+
+        element = self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_favorite_count"]/a/span')))
+        tovarvs = element.text
+        if tovarvs == "(1)":
+            self.to_file("Test_6_passed")
+        else:
+            self.to_file("Test_6_failed")
+            
 
 
 
@@ -145,8 +165,8 @@ if __name__ == "__main__":
     #suite.addTest(TestOnSurus_Sport('test2'))
     #suite.addTest(TestOnSurus_Sport('test3'))
     #suite.addTest(TestOnSurus_Sport('test4'))
-    suite.addTest(TestOnSurus_Sport('test5'))
-    #suite.addTest(TestOnSurus_Sport('test6'))
+    #suite.addTest(TestOnSurus_Sport('test5'))
+    suite.addTest(TestOnSurus_Sport('test6'))
     #suite.addTest(TestOnSurus_Sport('test7'))
     #suite.addTest(TestOnSurus_Sport('test8'))
     #suite.addTest(TestOnSurus_Sport('test9'))
