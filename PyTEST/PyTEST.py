@@ -73,7 +73,7 @@ class TestOnSurus_Sport(unittest.TestCase):
 
 #тест3 добавление товара в корзину
     def test3(self):
-        self.to_file("Test_2_start")
+        self.to_file("Test_3_start")
         self.driver.get(self.sitetest)  
         
         self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="page"]/header/nav/div/div/ul/li[1]'))).click()  
@@ -83,12 +83,34 @@ class TestOnSurus_Sport(unittest.TestCase):
         time.sleep(2)
 
         element = self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_cart_block"]/span/span[2]')))
-        
         poisk = element.text
         if poisk == "1 позиция на 330 руб.":
             self.to_file("Test_3_passed")
         else:
             self.to_file("Test_3_failed")
+
+#тест4 удаление товара из корзины
+    def test4(self):
+        self.to_file("Test_4_start")
+        self.driver.get(self.sitetest)  
+        
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="page"]/header/nav/div/div/ul/li[1]'))).click()  
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_3966226736_74451"]/div/div[2]/a'))).click() 
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_117848907_74451_buy_link74730"]'))).click()
+
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="page"]/header/div[2]/div/div[3]'))).click()
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="basket_items"]/div[2]/button'))).click()
+        
+
+        time.sleep(2)
+
+        element = self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="empty_basket"]/div[2]/div[2]')))
+        poisk = element.text
+        if poisk == "Ваша корзина пуста":
+            self.to_file("Test_4_passed")
+        else:
+            self.to_file("Test_4_failed")
+
 
 
 
@@ -97,8 +119,8 @@ if __name__ == "__main__":
 
     #suite.addTest(TestOnSurus_Sport('test1'))
     #suite.addTest(TestOnSurus_Sport('test2'))
-    suite.addTest(TestOnSurus_Sport('test3'))
-    #suite.addTest(TestOnSurus_Sport('test4'))
+    #suite.addTest(TestOnSurus_Sport('test3'))
+    suite.addTest(TestOnSurus_Sport('test4'))
     #suite.addTest(TestOnSurus_Sport('test5'))
     #suite.addTest(TestOnSurus_Sport('test6'))
     #suite.addTest(TestOnSurus_Sport('test7'))
