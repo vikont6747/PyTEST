@@ -34,22 +34,20 @@ class TestOnSurus_Sport(unittest.TestCase):
         self.to_file("Test_1_start")
         self.driver.get(self.sitetest)
 
-        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_personal_menu"]'))).click()    #нажать кнопку   
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_personal_menu"]'))).click()     
         
-        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="login"]/div[2]/form/div[1]/fieldset/input[1]'))).clear()    #очистка поля
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="login"]/div[2]/form/div[1]/fieldset/input[1]'))).clear()    
         self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="login"]/div[2]/form/div[1]/fieldset/input[2]'))).clear()
         
-        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="login"]/div[2]/form/div[1]/fieldset/input[1]'))).send_keys("barboss8208@gmail.com")    #заполнение поля
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="login"]/div[2]/form/div[1]/fieldset/input[1]'))).send_keys("barboss8208@gmail.com")   
         self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="login"]/div[2]/form/div[1]/fieldset/input[2]'))).send_keys("test1234")
         
-        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="login"]/div[2]/form/button'))).click()    #нажать кнопку   
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="login"]/div[2]/form/button'))).click()    
 
         element = self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_personal_menu"]/a')))
         login = element.text
-        if login == "Личный кабинет":
-            self.to_file("Test_1_passed")
-        else:
-            self.to_file("Test_1_failed")
+        assert login == "Личный кабинет", "Тест 1 не пройден"
+        self.to_file("Test_1_passed")
 
 #тест2 поиск по каталогу
     def test2(self):
@@ -65,10 +63,8 @@ class TestOnSurus_Sport(unittest.TestCase):
         element = self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="search-dropdown"]/ul/li/ul/li[2]/a/span[2]/span[1]/b')))
         
         poisk = element.text
-        if poisk == "Шорты":
-            self.to_file("Test_2_passed")
-        else:
-            self.to_file("Test_2_failed")
+        assert poisk == "Шорты", "Тест 2 не пройден"
+        self.to_file("Test_2_passed")
 
 
 #тест3 добавление товара в корзину
@@ -84,10 +80,8 @@ class TestOnSurus_Sport(unittest.TestCase):
 
         element = self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_cart_block"]/span/span[2]')))
         tovar = element.text
-        if tovar == "1 позиция на 330 руб.":
-            self.to_file("Test_3_passed")
-        else:
-            self.to_file("Test_3_failed")
+        assert tovar == "1 позиция на 330 руб.", "Тест 3 не пройден"
+        self.to_file("Test_3_passed")
 
 #тест4 удаление товара из корзины
     def test4(self):
@@ -106,10 +100,8 @@ class TestOnSurus_Sport(unittest.TestCase):
 
         element = self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="empty_basket"]/div[2]/div[2]')))
         tovardel = element.text
-        if tovardel == "Ваша корзина пуста":
-            self.to_file("Test_4_passed")
-        else:
-            self.to_file("Test_4_failed")
+        assert tovardel == "Ваша корзина пуста", "Тест 4 не пройден"
+        self.to_file("Test_4_passed")
 
 #тест5 сравнить товары
     def test5(self):
@@ -130,10 +122,8 @@ class TestOnSurus_Sport(unittest.TestCase):
 
         element = self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_compare_count"]/span')))
         tovarvs = element.text
-        if tovarvs == "(2)":
-            self.to_file("Test_5_passed")
-        else:
-            self.to_file("Test_5_failed")
+        assert tovarvs == "(2)", "Тест 5 не пройден"
+        self.to_file("Test_5_passed")
 
 #тест6 добавление товара в избранное
     def test6(self):
@@ -150,10 +140,8 @@ class TestOnSurus_Sport(unittest.TestCase):
 
         element = self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="bx_favorite_count"]/a/span')))
         tovarlike = element.text
-        if tovarlike == "(1)":
-            self.to_file("Test_6_passed")
-        else:
-            self.to_file("Test_6_failed")
+        assert tovarlike == "(1)", "Тест 6 не пройден"
+        self.to_file("Test_6_passed")
             
 #тест7 фильтрация списка товаров
     def test7(self):
@@ -167,10 +155,8 @@ class TestOnSurus_Sport(unittest.TestCase):
 
         element = self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="modef"]/span')))
         tovarf = element.text
-        if tovarf == "6":
-            self.to_file("Test_7_passed")
-        else:
-            self.to_file("Test_7_failed")
+        assert tovarf == "6", "Тест 7 не пройден"
+        self.to_file("Test_7_passed")
 
 #тест8 сортировка списка товаров
     def test8(self):
@@ -185,10 +171,8 @@ class TestOnSurus_Sport(unittest.TestCase):
 
         element = self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="page"]/section[1]/div[2]/article[1]/div[1]/div[1]/div[2]/div[1]/label[1]/div[1]/div[1]/div[1]')))
         tovarsort = element.text
-        if tovarsort == "Цене, сначала дорогие":
-            self.to_file("Test_8_passed")
-        else:
-            self.to_file("Test_8_failed")
+        assert tovarsort == "Цене, сначала дорогие", "Тест 8 не пройден"
+        self.to_file("Test_8_passed")
 
 #тест9 расчет стоимости по количеству товара
     def test9(self):
@@ -205,10 +189,8 @@ class TestOnSurus_Sport(unittest.TestCase):
 
         element = self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="basket_items"]/div[2]/div[2]/div[1]/div[2]/div[2]/div[1]/div[2]')))
         tovar = element.text
-        if tovar == "660 руб.":
-            self.to_file("Test_9_passed")
-        else:
-            self.to_file("Test_9_failed")
+        assert tovar == "660 руб.", "Тест 9 не пройден"
+        self.to_file("Test_9_passed")
 
 #тест10 переключение карусели баннеров
     def test10(self):
@@ -219,10 +201,8 @@ class TestOnSurus_Sport(unittest.TestCase):
         self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="page"]/section[1]/div[1]/div[1]/div[3]/div[1]'))).click()
         
         element = self.wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="page"]/section[1]/div[1]/div[1]/div[3]/div[1]'))).get_attribute("class")
-        if element == "owl-dot active":
-            self.to_file("Test_10_passed")
-        else:
-            self.to_file("Test_10_failed")
+        assert element == "owl-dot active", "Тест 10 не пройден"
+        self.to_file("Test_10_passed")
 
 
 if __name__ == "__main__":
